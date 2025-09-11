@@ -1,7 +1,7 @@
 package me.kalin.myspringai.service
 
-import me.kalin.myspringai.code.ChatType
-import me.kalin.myspringai.dto.ChatRequest
+import me.kalin.myspringai.code.PromptType
+import me.kalin.myspringai.dto.PromptRequest
 import org.springframework.ai.chat.client.ChatClient
 import org.springframework.ai.chat.messages.SystemMessage
 import org.springframework.ai.chat.messages.UserMessage
@@ -10,22 +10,22 @@ import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 
 @Service
-class ChatService(
+class PromptService(
     private val chatClient: ChatClient
 ) {
-    fun provider(chatRequest: ChatRequest): Flux<String> {
-        return when (chatRequest.chatType) {
-            ChatType.FEW_SHOT -> fewShot(chatRequest.question)
+    fun provider(promptRequest: PromptRequest): Flux<String> {
+        return when (promptRequest.chatType) {
+            PromptType.FEW_SHOT -> fewShot(promptRequest.question)
 
-            ChatType.ZERO_SHOT -> zeroShot(chatRequest.question)
+            PromptType.ZERO_SHOT -> zeroShot(promptRequest.question)
 
-            ChatType.ROLE_ASSIGNMENT -> roleAssignment(chatRequest.question)
+            PromptType.ROLE_ASSIGNMENT -> roleAssignment(promptRequest.question)
 
-            ChatType.STEP_BACK -> stepBack(chatRequest.question)
+            PromptType.STEP_BACK -> stepBack(promptRequest.question)
 
-            ChatType.CHAIN_OF_THOUGHT -> chainOfThought(chatRequest.question)
+            PromptType.CHAIN_OF_THOUGHT -> chainOfThought(promptRequest.question)
 
-            ChatType.SELF_CONSISTENCY -> selfConsistency(chatRequest.question)
+            PromptType.SELF_CONSISTENCY -> selfConsistency(promptRequest.question)
 
             else -> throw IllegalArgumentException()
         }

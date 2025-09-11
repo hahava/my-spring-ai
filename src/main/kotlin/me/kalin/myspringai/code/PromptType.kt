@@ -1,6 +1,6 @@
 package me.kalin.myspringai.code
 
-enum class ChatType {
+enum class PromptType {
     ZERO_SHOT,
     FEW_SHOT,
     ROLE_ASSIGNMENT,
