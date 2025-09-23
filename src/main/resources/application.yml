@@ -11,3 +11,20 @@ spring:
         options:
           temperature: 0.5
           model: "gpt-4o-mini"
+      embedding:
+        options:
+          model: "text-embedding-ada-002"
+    vectorstore:
+      observations:
+        log-query-response: true
+      pgvector:
+        initialize-schema: true
+
+logging:
+  level:
+    org:
+      springframework:
+        ai:
+          chat:
+            client:
+              advisor: DEBUG
